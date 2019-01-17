@@ -9,7 +9,7 @@ public class Main {
         assert playgroundService.averageAge() == 37.8 : "Average age should be 37.8";
 
         System.out.println("Longest working employee worked for: " + playgroundService.mostYearsEmployed());
-        assert playgroundService.mostYearsEmployed() == 23: "Longest working employee should be 23";
+        assert playgroundService.mostYearsEmployed() == 23 : "Longest working employee should be 23";
 
         System.out.println("Number of male employees: " + playgroundService.maleEmployeeCount());
         assert playgroundService.maleEmployeeCount() == 9 : "Number of male employees should be 9";

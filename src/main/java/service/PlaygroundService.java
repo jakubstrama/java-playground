@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PlaygroundService {
 
-    private List<Employee> employees;
+    private final List<Employee> employees;
 
     public PlaygroundService() {
         EmployeeService employeeService = new EmployeeService();
