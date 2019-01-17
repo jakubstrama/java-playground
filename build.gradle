@@ -4,3 +4,4 @@ apply plugin: 'application'
 mainClassName = 'Main'
 //enableAssertions = true
 
+sourceCompatibility = 11
