@@ -1,8 +1,15 @@
 package service;
 
 import model.Employee;
+import model.Gender;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PlaygroundService {
 
@@ -15,19 +22,37 @@ public class PlaygroundService {
 
 
     public Double averageAge() {
-        return 0.0;
+
+        return employees.stream()
+                .mapToDouble(Employee::getAge)
+                .average()
+                .orElse(0);
     }
 
     public Long mostYearsEmployed() {
-        return 0L;
+
+        int mostYears = employees.stream()
+                .mapToInt(e -> Period.between(e.getDateJoined(), LocalDate.now()).getYears())
+                .max()
+                .orElse(0);
+
+        return Long.valueOf(mostYears);
     }
 
     public Long maleEmployeeCount() {
-        return 0L;
+
+        return employees.stream()
+                .filter(e -> e.getGender().equals(Gender.MALE))
+                .count();
     }
 
     public Integer yearMostPeopleJoined() {
-        return 0;
+
+        Map<Integer, Long> counters = employees.stream()
+                .collect(Collectors.groupingBy(e -> e.getDateJoined().getYear(), Collectors.counting()));
+
+
+        return Collections.max(counters.entrySet(), Comparator.comparingLong(e -> e.getValue())).getKey();
     }
 
 }
