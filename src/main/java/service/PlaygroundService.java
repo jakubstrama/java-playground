@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 public class PlaygroundService {
@@ -23,10 +24,22 @@ public class PlaygroundService {
 
     public Double averageAge() {
 
+//        OptionalDouble result = employees.stream()
+//                .mapToDouble(Employee::getAge)
+//                .average();
+//
+//        if (result.isPresent()) {
+//            return result.getAsDouble();
+//        } else
+//        {
+//            return (double) 0;
+//        }
+
         return employees.stream()
                 .mapToDouble(Employee::getAge)
                 .average()
                 .orElse(0);
+
     }
 
     public Long mostYearsEmployed() {
@@ -36,13 +49,13 @@ public class PlaygroundService {
                 .max()
                 .orElse(0);
 
-        return Long.valueOf(mostYears);
+        return (long) mostYears;
     }
 
     public Long maleEmployeeCount() {
 
         return employees.stream()
-                .filter(e -> e.getGender().equals(Gender.MALE))
+                .filter(e -> e.getGender() == Gender.MALE)
                 .count();
     }
 
@@ -52,7 +65,7 @@ public class PlaygroundService {
                 .collect(Collectors.groupingBy(e -> e.getDateJoined().getYear(), Collectors.counting()));
 
 
-        return Collections.max(counters.entrySet(), Comparator.comparingLong(e -> e.getValue())).getKey();
+        return Collections.max(counters.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }
 
 }
